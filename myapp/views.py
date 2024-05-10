@@ -2,8 +2,8 @@ from django.shortcuts import render
 from .models import Todo
 
 def index(request):
-    todos = Todo.objects.al().order_by('-id')
-    return render(request, index.html, {'todos':todos})
+    todos = Todo.objects.all().order_by('-id')
+    return render(request, 'index.html', {'todos':todos})
 
 def create_todo(request):
     title = request.POST.get('title')
