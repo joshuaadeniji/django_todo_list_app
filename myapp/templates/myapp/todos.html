@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Todos{% endblock title %}
+    
+
+{% block content %}
+<h3 class="my-5">Your Todo Lists</h3>
+<form hx-post="{% url 'create_todo' %}" hx-target="#todoList" class="mx-auto">
+    {% csrf_token %}
+    <div class="mb-3 row align-items-center">
+        <label for="todoText" class="col-auto col-form-label">Enter Your Todo here</label>
+        <div class="col-6">
+            <input type="text" class="form-control" name='create_todo' id="todoText" required>
+        </div>
+        <div class="col-auto">
+            <button type='submit' class="btn btn-success">Add</button>
+        </div>
+    </div>
+</form>
+<div id="todoList">
+    {% include 'myapp/todo-list.html' %}
+<div>
+{% endblock content %}
+
+{% block js_script %}
+<script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    })   
+
+</script>
+
+{% endblock js_script %}

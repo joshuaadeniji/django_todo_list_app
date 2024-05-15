@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
-    path('', views.index, name='home'),
+    path('todos/', views.todos, name='todos'),
 ]
+
 
 htmxpatterns = [
     path('create_todo/', views.create_todo, name='create_todo'),
